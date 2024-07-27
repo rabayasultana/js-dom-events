@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubble</title>
+</head>
+<body id="body">
+   <h1>Exploring Event Bubble</h1> 
+   <section id="list-container">
+    <ul id="list-ul">
+        <li id="item1">Lorem, ipsum.</li>
+        <li id="item2">Corrupti, ab.</li>
+        <li id="item3">Accusantium, excepturi!</li>
+        <li id="item4">Aliquam, fuga?</li>
+        <li id="item5">Voluptas, iste.</li>
+        <li id="item6">Adipisci, obcaecati?</li>
+    </ul>
+   </section>
+   <script>
+    document.getElementById('item2').addEventListener('click',function(){
+        console.log('item2 clicked')
+    });
+    // stop propagation
+    document.getElementById('item3').addEventListener('click',function(event){
+        console.log('item3 clicked');
+        event.stopPropagation();
+    });
+    // event handler can be used more than one time 
+    document.getElementById('item5').addEventListener('click',function(event){
+        console.log('item5 clicked');
+    });
+    document.getElementById('item5').addEventListener('click',function(event){
+        console.log('item5 clicked');
+    });
+    document.getElementById('item5').addEventListener('click',function(event){
+        console.log('item5 clicked');
+        event.stopPropagation();
+    });
+
+    // stop immediate stopPropagation
+    document.getElementById('item4').addEventListener('click',function(event){
+        console.log('item4 clicked');
+        event.stopImmediatePropagation();
+    });
+    document.getElementById('item4').addEventListener('click',function(event){
+        console.log('item4 clicked');
+    });
+    document.getElementById('item4').addEventListener('click',function(event){
+        console.log('item4 clicked');
+    });
+
+    // ul clicked
+    document.getElementById('list-ul').addEventListener('click', function(){
+        console.log('ul clicked');
+    });
+    document.getElementById('list-container').addEventListener('click', function(){
+        console.log('container section clicked');
+    });
+    document.getElementById('body').addEventListener('click', function(){
+        console.log('Body of the html clicked');
+    });
+   </script>
+</body>
+</html>
